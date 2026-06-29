@@ -1,5 +1,5 @@
 exports.getBooks = (req, res) => {
-    res.json({
-        message: "Books from controller"
-    });
+  res.json({
+    message: 'Books from controller',
+  });
 };
