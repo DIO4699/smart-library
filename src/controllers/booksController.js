@@ -3,7 +3,10 @@ const Review = require("../models/Review");
 
 exports.createBook = async (req, res) => {
     try {
-        const book = await Book.create(req.body);
+        const books = await Book.find()
+            .select("-__v")
+            .skip((page - 1) * limit)
+            .limit(limit);
 
         res.status(201).json(book);
     } catch (error) {
@@ -13,11 +16,33 @@ exports.createBook = async (req, res) => {
     }
 };
 
+/*
+ * Get paginated books.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {Promise<void>}
+ */
 exports.getBooks = async (req, res) => {
     try {
-        const books = await Book.find();
+        let { page = 1, limit = 5 } = req.query;
 
-        res.json(books);
+        page = Math.max(1, Number(page));
+        limit = Math.min(100, Math.max(1, Number(limit)));
+
+        const total = await Book.countDocuments();
+
+        const books = await Book.find()
+            .select("-__v")
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        res.json({
+            data: books,
+            total,
+            page,
+            limit,
+        });
     } catch (error) {
         res.status(500).json({
             error: error.message,
