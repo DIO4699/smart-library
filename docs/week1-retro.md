@@ -4,7 +4,7 @@
 
 - Git branching
 - Node.js basics
-- Linting and Prittier 
+- Linting and Prittier
 - Express servers
 - MVC architecture
 
@@ -16,4 +16,4 @@
 ## What I would improve
 
 - Spend more time off internship to learn more in depth
-- Get more comfortable with javascript 
+- Get more comfortable with javascript
