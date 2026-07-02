@@ -10,6 +10,10 @@ const app = express();
 
 const booksRouter = require('./routes/books');
 
+const swaggerUi = require("swagger-ui-express");
+
+const swaggerSpec = require("./config/swagger");
+
 const PORT = 3000;
 
 app.use(express.json());
@@ -21,6 +25,12 @@ app.get('/health', (req, res) => {
     status: 'ok',
   });
 });
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec)
+);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
