@@ -14,11 +14,15 @@ const swaggerUi = require("swagger-ui-express");
 
 const swaggerSpec = require("./config/swagger");
 
+const errorHandler = require("./middleware/errorHandler");
+
 const PORT = 3000;
 
 app.use(express.json());
 
 app.use('/api/books', booksRouter);
+
+app.use(errorHandler);
 
 app.get('/health', (req, res) => {
   res.status(200).json({

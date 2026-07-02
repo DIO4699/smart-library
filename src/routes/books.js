@@ -4,6 +4,8 @@ const router = express.Router();
 
 const booksController = require('../controllers/booksController');
 
+const { validateBook } = require("../middleware/bookValidation");
+
 /**
  * @swagger
  * /api/books:
@@ -47,8 +49,11 @@ router.get('/', booksController.getBooks);
  *         description: Book created
  */
 
-router.post('/', booksController.createBook);
-
+router.post(
+    "/",
+    validateBook,
+    booksController.createBook
+);
 /**
  * @swagger
  * /api/books/{id}/reviews:

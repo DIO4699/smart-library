@@ -15,6 +15,22 @@ const options = {
                 url: "http://localhost:3000",
             },
         ],
+
+        components: {
+            schemas: {
+                Book: {
+                    type: "object",
+                    properties: {
+                        title: {
+                            type: "string",
+                        },
+                        author: {
+                            type: "string",
+                        },
+                    },
+                },
+            },
+        },
     },
 
     apis: ["./src/routes/*.js"],
